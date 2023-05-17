@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+	<title>Recipe App</title>
+	<style media="screen">
+		body {
+			margin: 10;
+			padding: 0;
+			height: 100%;
+			color: black;
+			text-align: center;
+			font-family: sans-serif;
+		}
+
+		#nav {
+			background-color:blue;
+            border: black dashed 5px;
+            padding:10%;
+		}
+
+		#footer {
+			background-color: blue;
+			position: relative;
+			bottom: 0;
+            font-family: sans-serif;
+            color: white
+		}
+
+		#container {
+			height: 100px;
+			padding-top: 40px;
+		}
+
+		.block {
+			padding-top: 40px;
+			width: 100%;
+			text-align: center;
+			height: 60px;
+			border: black dashed 5px;
+		}
+
+        h1{
+            border: black dashed 5px; 
+            background-color: red;
+        }
+	</style>
+</head>
+
+<body>
+
+  <%- include('partials/navigation') %>
+  <%- include('partials/testing') %>
+	<div id="container">
+		<%- body %>
+	</div>
+	<div id="footer" class="block">FOOTER</div>
+
+
+</body>
+
+</html>
