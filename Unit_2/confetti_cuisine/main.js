@@ -26,9 +26,9 @@ app.set('view engine', 'ejs');
 app.use(layouts);
 app.set("port", process.env.PORT || 3000);
 
-//Error handling routes
-app.use(errorController.pageNotFoundError);
-app.use(errorController.internalServerError);
+// //Error handling routes
+// app.use(errorController.pageNotFoundError);
+// app.use(errorController.internalServerError);
 
 
 
