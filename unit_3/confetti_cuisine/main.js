@@ -10,7 +10,7 @@ const app = express();
 
 //connect to mongoose
 mongoose.connect(
-    "mongodb://localhost:27017/confetti_cuisine",
+    "mongodb://127.0.0.1:27017/confetti_cuisine",
     { useNewUrlParser: true }
 );
 

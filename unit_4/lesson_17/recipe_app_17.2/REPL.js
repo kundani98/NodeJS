@@ -4,21 +4,23 @@
 
 //Require Mongose and connect to database,recipe db and tell mongose to us native promises
 const mongoose = require("mongoose"),
-    Subscriber = require("./models/subscriber");
+ Subscriber = require("./models/subscriber");
 mongoose.connect(
-    "mongodb://localhost:27017/recipe_db",
-    { useNewUrlParser: true }
+ "mongodb://127.0.0.1:27017/recipe_db",
+ {useNewUrlParser: true}
 );
 mongoose.Promise = global.Promise;
 
 //listing 17.5 Testing model methos and mongoose queries in REPL terminal
+
 Subscriber.create({
     name: "Jon",
-    email: "jon@jonwexler.com",
+    email: "ken@jonwexler.com",
     zipCode: "12345"
 })
     .then(subscriber => console.log(subscriber))
     .catch(error => console.log(error.message));
+
 var subscriber;
 Subscriber.findOne({
     name: "Jon"
@@ -32,7 +34,7 @@ Subscriber.findOne({
 //a layer over the database to map documents to JavaScript objects.
 
 //listing 17.6 Creating a new schema and model in course.js
-const mongoose = require("mongoose");
+
 const courseSchema = new mongoose.Schema({
     title: {
         type: String,

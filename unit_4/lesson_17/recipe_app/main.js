@@ -1,15 +1,7 @@
 
 //Mongoose acts as a layer over the database to map documents to JavaScript objects
+//Validators are rules thatyou apply to model properties, preventing them from saving to your database unless those rules are met
 
-//CRUD actions 
-//Create 
-//Read 
-//Update 
-//Delete
-
-//CRUD HTTP methods 
-//PUT 
-//DELETE
 
 //required and objects
 const port = 3000;

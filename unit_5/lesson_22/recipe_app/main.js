@@ -20,6 +20,22 @@ express = require("express"),
  usersController = require("./controllers/usersController"),
  app = express();
 
+ const expressSession = require("express-session"),
+ cookieParser = require("cookie-parser"),
+ connectFlash = require("connect-flash");
+router.use(cookieParser("secret_passcode"));
+router.use(expressSession({
+ secret: "secret_passcode",
+ cookie: {
+ maxAge: 4000000
+ },
+ resave: false,
+ saveUninitialized: false
+}));
+router.use(connectFlash());
+
+
+
  mongoose.connect(
   "mongodb://127.0.0.1:27017/recipe_db",
   {useNewUrlParser: true}

@@ -34,10 +34,10 @@ app.get("/items/:vegetable", (req, res) => {
 /////////////////////////////////////////////////////////////////////////////
 
 //Request object methods 
-console.log("params" + req.params);
- console.log("body" + res.body);
- console.log("url" + req.url);
- console.log("query" + req.query);
+// console.log("params" + req.params);
+//  console.log("body" + res.body);
+//  console.log("url" + req.url);
+//  console.log("query" + req.query);
 
 
 

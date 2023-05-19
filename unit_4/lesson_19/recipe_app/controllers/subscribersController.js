@@ -1,4 +1,35 @@
 
+const Subscriber = require("../models/subscriber"),
+    mongoose = require("mongoose");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 
 
     exports.getAllSubscribers = (req, res, next) => {
@@ -16,8 +47,6 @@
 exports.getSubscriptionPage = (req, res) => {
  res.render("contact");
 };
-
-
 exports.saveSubscriber = (req, res) => {
  let newSubscriber = new Subscriber({
  name: req.body.name,

@@ -6,7 +6,12 @@
 
 const httpStatus = require("http-status-codes");
 
-
+exports.logErrors = (error, req, res, next) => {
+    // log error stack.
+    console.error(error.stack);
+    // pass error to next middleware function.
+    next(error);
+};
 
 exports.respondNoResourceFound = (req, res) => {
     let errorCode = httpStatus.NOT_FOUND;
