@@ -45,7 +45,7 @@ const Subscriber = mongoose.model("Subscriber", subscriberSchema)
 
 
 //listing 14.4: Statements to create and save models
-var subscriber1 = new Subscriver({
+var subscriber1 = new Subscriber({
   name: "Jon Wexler",
   email: "jon@jonwexler.com"
 });

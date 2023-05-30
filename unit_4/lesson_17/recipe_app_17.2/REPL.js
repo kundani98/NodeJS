@@ -4,7 +4,8 @@
 
 //Require Mongose and connect to database,recipe db and tell mongose to us native promises
 const mongoose = require("mongoose"),
- Subscriber = require("./models/subscriber");
+ Subscriber = require("./models/subscriber"),
+ Course = require("./models/course");
 mongoose.connect(
  "mongodb://127.0.0.1:27017/recipe_db",
  {useNewUrlParser: true}

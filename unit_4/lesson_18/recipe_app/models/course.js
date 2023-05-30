@@ -6,21 +6,7 @@ const courseSchema = new mongoose.Schema({
  unique: true
  },
  description: {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+   
  type: String,
  required: true
  },
