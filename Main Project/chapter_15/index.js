@@ -1,59 +1,71 @@
-const express = require('express');
-const app = new express();
-const ejs = require('ejs');
-const mongoose = require('mongoose');
-const fileUpload = require('express-fileupload');
-const validateMiddleWare = require("./middleware/validateMiddleware");
-const expressSession = require('express-session');
-const authMiddleware = require('./middleware/authMiddleware');
-const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
-const flash = require('connect-flash');
 
-app.set('view engine', 'ejs');
+//Package Json
+const express = require('express')
+const mongoose = require('mongoose')
+const ejs = require('ejs')
+const fileUpload = require('express-fileupload')
+const flash = require('connect-flash')
+
+//Controllers and Middleware
+const newPostController = require('./controllers/newPost')
+const homeController = require('./controllers/home')
+const storePostController = require('./controllers/storePost')
+const storeUserController = require('./controllers/storeUser')
+const newUserController = require('./controllers/newUser')
+const getPostController = require('./controllers/getPost')
+const validateMiddleware = require("./middleware/validateMiddleware");
+const authMiddleware = require('./middleware/authMiddleware')
+const loginController = require('./controllers/login')
+const loginUserController = require('./controllers/loginUser')
+const logoutController = require('./controllers/logout')
+const expressSession = require('express-session')
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
+const BlogPost = require('./models/BlogPost.js')
+
+const app = new express()
+
+//attach middleware
 app.use(express.static('public'))
+app.set('view engine', 'ejs')
+app.use(fileUpload());
+
 app.use(express.json())
 app.use(express.urlencoded())
-app.use(fileUpload())
-app.use('/posts/store', validateMiddleWare)
-app.get('/posts/new',authMiddleware, newPostController)
-app.post('/posts/store', authMiddleware, storePostController)
-app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController)
-app.post('/users/register', redirectIfAuthenticatedMiddleware,storeUserController)
-app.get('/auth/login', redirectIfAuthenticatedMiddleware, loginController)
-app.post('/users/login',redirectIfAuthenticatedMiddleware, loginUserController)
-app.use(flash());
+
 app.use(expressSession({
     secret: 'keyboard cat'
 }))
 
-global.loggedIn = null;
-app.use("*", (req, res, next) => {
- loggedIn = req.session.userId;
- next() 
-});
+app.use(flash())
 
-mongoose.connect('mongodb://127.0.0.1/my_database', { useNewUrlParser: true });
+global.loggedIn = null;    
 
-const newPostController = require('./controllers/newPost')
-const homeController = require('./controllers/home')
-const storePostController = require('./controllers/storePost')
-const getPostController = require('./controllers/getPost')
-const newUserController = require('./controllers/newUser')
-const storeUserController = require('./controllers/storeUser')
-const loginController = require('./controllers/login')
-const logoutController = require('./controllers/logout')
+// use on all requests
+app.use('*', (req, res, next) => {
+    loggedIn = req.session.userId;
+    next();
+})
 
+
+//Connect to database
+mongoose.connect('mongodb+srv://Kundani:WnuDb01tYKLuTQPA@cluster0.uhrx2jt.mongodb.net/?retryWrites=true&w=majority/my_database', { useNewUrlParser: true })
+
+
+//Routes
+app.get('/posts/new', authMiddleware, newPostController)
 app.get('/', homeController)
-app.get('/post/:id', storePostController)
-app.get('/posts/new', newPostController)
-app.post('/posts/store', getPostController)
-app.get('/auth/register', newUserController)
-app.post('/users/register', storeUserController)
-app.get('/auth/login', loginController);
-app.get('/auth/logout', logoutController)
-app.use((req, res) => res.render('notfound'));
+app.get('/post/:id', getPostController)
 
+app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController)
+app.get('/auth/login', redirectIfAuthenticatedMiddleware, loginController)
+app.get('/auth/logout', logoutController)
+
+app.post('/posts/store', authMiddleware, storePostController)
+app.post('/users/register', redirectIfAuthenticatedMiddleware, storeUserController)
+app.post('/users/login', redirectIfAuthenticatedMiddleware, loginUserController)
+
+app.use((req, res) => res.render('notfound'));
 
 app.listen(3000, () => {
     console.log('App listening on port 3000')
-});
+})
