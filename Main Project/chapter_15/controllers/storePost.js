@@ -7,10 +7,11 @@ module.exports = async (req, res) => {
 
     try {
         let image = req.files.image;
-        imgResult = await image.mv(path.resolve(__dirname, '..', 'public/img', image.name));
-        imgPath = '/img/' + image.name;
+        imgResult = await image.mv(path.resolve(__dirname, '..', 'public/assets/img', image.name));
+        imgPath = '/assets/img/' + image.name;
     } catch (error) {
         imgPath = null;
+        console.log(error)
     }
 
     try {
@@ -21,11 +22,13 @@ module.exports = async (req, res) => {
         })
     } catch (error) {
         const validationErrors = Object.keys(error.errors).map(key => error.errors[key].message)
-
+        console.log("222" , error)
         req.flash('validationErrors', validationErrors)
         req.flash('data', req.body)
 
         return res.redirect('/posts/new');
+
+       
     }
 
     res.redirect('/')

@@ -48,7 +48,7 @@ app.use('*', (req, res, next) => {
 
 
 //Connect to database
-mongoose.connect('mongodb+srv://Kundani:WnuDb01tYKLuTQPA@cluster0.uhrx2jt.mongodb.net/?retryWrites=true&w=majority/my_database', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://Kundani:WnuDb01tYKLuTQPA@cluster0.uhrx2jt.mongodb.net/my_database', { useNewUrlParser: true })
 
 
 //Routes
