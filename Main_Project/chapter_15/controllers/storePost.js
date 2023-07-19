@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
         imgPath = '/assets/img/' + image.name;
     } catch (error) {
         imgPath = null;
-        console.log(error)
+        
     }
 
     try {
